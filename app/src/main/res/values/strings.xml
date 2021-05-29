@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">InventoryApp</string>
+    <string name="first_slide_title">Track Inventory</string>
+    <string name="second_slide_title">Manage your Inventory</string>
+    <string name="third_slide_title">Manage Expenses</string>
+    <string name="first_slide_desc">Get Current Statistics of your Inventory</string>
+    <string name="second_slide_desc">Maximise profits by tracking products in inventory</string>
+    <string name="third_slide_desc">Have easy access to transactional and sales details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

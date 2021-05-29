@@ -1,0 +1,90 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AddProductActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:padding="5dp"
+                android:src="@drawable/arrow_back_icon"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="Add Product"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Category"
+            android:inputType="none"
+            android:drawableEnd="@drawable/arrow_tiangle_down_icon"
+            android:id="@+id/productCatN"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Name"
+            android:inputType="text"
+            android:id="@+id/prodName"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Quantity"
+            android:inputType="number"
+            android:id="@+id/prodQty"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Product Price (MWK)"
+            android:id="@+id/prodPrice"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Description"
+            android:inputType="text"
+            android:lines="4"
+            android:id="@+id/prodDesc"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:onClick="openScanActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/blue_300"
+            android:textColor="@color/white"
+            android:text="Next"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
