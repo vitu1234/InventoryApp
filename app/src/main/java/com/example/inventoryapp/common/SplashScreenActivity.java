@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,9 +14,12 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.inventoryapp.R;
-import com.example.inventoryapp.activities.AccountDirectActivity;
 import com.example.inventoryapp.activities.DashboardActivity;
+import com.example.inventoryapp.models.User;
+import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.storage.SharedPrefManager;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -23,6 +28,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     private static int SLIDE_TIMER = 4000;
 
     SharedPreferences sharedPreferencesOnboardingScreen;
+
+    AppDatabase room_db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +43,41 @@ public class SplashScreenActivity extends AppCompatActivity {
         slideAnimation = AnimationUtils.loadAnimation(this, R.anim.side_slide);
         imageViewLogo.startAnimation(slideAnimation);
 
+        room_db = AppDatabase.getDbInstance(this.getApplicationContext());
+
+
+        //check if user already inserted
+        /*if (room_db.userDao().countAllUsers() == 0) {
+//            room_db.userDao().deleteAllUsers();
+
+            String password = "12345678";
+            String hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+            User user = new User();
+            user.setEmail("admin@gmail.com");
+            user.setFirstname("Admin");
+            user.setLastname("Admin");
+            user.setPhoto("NULL");
+            user.setStatus("active");
+            user.setPassword(hashedPassword);
+            room_db.userDao().insertUser(user);
+        }
+
+
+        Log.e("user_count", "Count: " + room_db.userDao().countAllUsers() + " name: " + room_db.userDao().findByUserEmail("admin@gmail.com").getFirstname());
+
+*/
+        // $2a$12$US00g/uMhoSBm.HiuieBjeMtoN69SN.GE25fCpldebzkryUyopws6
+//        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), bcryptHashString);
+        // result.verified == true
+
+//        if (result.verified){
+//            Log.e("e","Verified");
+//        }else{
+//            Log.e("e","not verified");
+//        }
 
 //        //delay
-        new Handler().postDelayed(new Runnable() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
                 sharedPreferencesOnboardingScreen = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
@@ -55,17 +94,13 @@ public class SplashScreenActivity extends AppCompatActivity {
                 } else {
                     SharedPrefManager sharedPrefManager = new SharedPrefManager(getApplicationContext());
                     if (sharedPrefManager.isLoggedIn()) {
-                        if (!(sharedPrefManager.getAccountType() == null)) {
-                            startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-                            finish();
-
-                        } else {
-                            startActivity(new Intent(getApplicationContext(), AccountDirectActivity.class));
-                            finish();
-                        }
-
-                    } else {
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                        finish();
+                    } else {
+                        if (room_db.userDao().countAllUsers() >0) {
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                            finish();
+                        }else  startActivity(new Intent(getApplicationContext(), CreateAccountActivity.class));
                         finish();
                     }
 

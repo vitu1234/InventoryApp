@@ -6,7 +6,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-
 import com.example.inventoryapp.models.User;
 
 import java.util.List;
@@ -18,6 +17,9 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE user_id = :id")
     User findByUserId(int id);
+
+    @Query("SELECT * FROM user WHERE email = :email")
+    User findByUserEmail(String email);
 
     //    @Insert(onConflict = OnConflictStrategy.REPLACE)
     @Insert()
@@ -33,13 +35,15 @@ public interface UserDao {
     void deleteUser(User user);
 
     // on below line we are making query to
-    // delete all cars from our database.
     @Query("DELETE FROM user")
     void deleteAllUsers();
 
     //count car
     @Query("SELECT * FROM user WHERE user_id = :id")
     int getSingleUserCount(int id);
+
+    @Query("SELECT * FROM user WHERE email = :email")
+    int getSingleUserCountByEmail(String email);
 
     //count all car
     @Query("SELECT COUNT(*) FROM user ")

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.inventoryapp">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,6 +15,7 @@
     <uses-feature
         android:name="android.hardware.location.gps"
         android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,10 +23,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InventoryApp">
-        <activity android:name=".activities.ScanProductActivity"></activity>
+        <activity android:name=".common.CreateAccountActivity"></activity>
+        <activity android:name=".common.LoginActivity" />
+        <activity android:name=".activities.ProductCategoryActivity" />
+        <activity android:name=".activities.ScanProductActivity" />
         <activity android:name=".activities.AddProductActivity" />
         <activity android:name=".common.OnBoardingActivity" />
-        <activity android:name=".activities.AccountDirectActivity" />
+        <activity android:name=".common.AccountDirectActivity" />
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".common.SplashScreenActivity">
             <intent-filter>

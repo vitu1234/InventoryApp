@@ -1,4 +1,4 @@
-package com.example.inventoryapp.activities;
+package com.example.inventoryapp.common;
 
 import androidx.appcompat.app.AppCompatActivity;
 

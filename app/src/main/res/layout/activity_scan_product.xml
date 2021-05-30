@@ -8,13 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grey_100"
+            android:elevation="8dp"
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -36,29 +38,36 @@
 
         </RelativeLayout>
 
-        <ImageView
+        <LinearLayout
+            android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/scan_img" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/roboto_mono_light"
-            android:text="Scanning result will automatically add the item if the product does not exist"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/scan_img" />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/blue_300"
-            android:text="Done"
-            android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/roboto_mono_light"
+                android:text="Scanning result will automatically add the item if the product does not exist"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/blue_300"
+                android:text="Done"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,8 +1,5 @@
 package com.example.inventoryapp.common;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,15 +11,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.inventoryapp.R;
-import com.example.inventoryapp.activities.DashboardActivity;
 import com.example.inventoryapp.adapters.onboard.SliderAdapter;
 
 public class OnBoardingActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     LinearLayout dotsLayout;
-    Button buttonGetStarted,btnNxt,btnSkip;
+    Button buttonGetStarted, btnNxt, btnSkip;
 
     SliderAdapter sliderAdapter;
     int current_position;
@@ -33,7 +32,7 @@ public class OnBoardingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //remove status bar
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_on_boarding);
 
@@ -85,8 +84,9 @@ public class OnBoardingActivity extends AppCompatActivity {
     public void skip(View view) {
 
 
-        startActivity(new Intent(this, DashboardActivity.class));
+        startActivity(new Intent(getApplicationContext(), CreateAccountActivity.class));
         finish();
+
     }
 
     public void next(View view) {

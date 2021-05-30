@@ -31,17 +31,12 @@ public class SharedPrefManager {
 
 
         editor.putInt("user_id", user.getUser_id());
-        editor.putInt("role_id", user.getRole_id());
         editor.putString("firstname", user.getFirstname());
         editor.putString("lastname", user.getLastname());
         editor.putString("email", user.getEmail());
-        editor.putString("phone", user.getPhone());
         editor.putString("photo", user.getPhoto());
         editor.putString("status", user.getStatus());
-        editor.putString("email_verification_status", user.getEmail_verification_status());
-        editor.putString("phone_verification_status", user.getPhone_verification_status());
-        editor.putString("date_registered", user.getDate_registered());
-        editor.putString("user_role", user.getUser_role());
+
         editor.apply();
     }
 
@@ -86,18 +81,13 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         User user = new User(
-                sharedPreferences.getInt("user_id", -1),
-                sharedPreferences.getInt("role_id", -1),
+                sharedPreferences.getInt("user_id",-1),
                 sharedPreferences.getString("firstname", null),
                 sharedPreferences.getString("lastname", null),
                 sharedPreferences.getString("email", null),
-                sharedPreferences.getString("phone", null),
+                sharedPreferences.getString("password", null),
                 sharedPreferences.getString("photo", null),
-                sharedPreferences.getString("status", null),
-                sharedPreferences.getString("email_verification_status", null),
-                sharedPreferences.getString("phone_verification_status", null),
-                sharedPreferences.getString("date_registered", null),
-                sharedPreferences.getString("user_role", null)
+                sharedPreferences.getString("status", null)
         );
         return user;
 

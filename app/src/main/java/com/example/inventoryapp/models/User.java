@@ -8,13 +8,8 @@ import androidx.room.PrimaryKey;
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    int room_user_id;
-
-    @ColumnInfo(name = "user_id")
     int user_id;
 
-    @ColumnInfo(name = "role_id")
-    int role_id;
 
     @ColumnInfo(name = "firstname")
     String firstname;
@@ -24,48 +19,60 @@ public class User {
     @ColumnInfo(name = "email")
     String email;
 
-    @ColumnInfo(name = "phone")
-    String phone;
+    @ColumnInfo(name = "password")
+    String password;
 
-    @ColumnInfo(name = "photo")
+    @ColumnInfo(name = "photo", defaultValue = "NULL")
     String photo;
 
-    @ColumnInfo(name = "status")
+    @ColumnInfo(name = "status")//1 = active, 2 inactive
     String status;
 
-    @ColumnInfo(name = "email_verification_status")
-    String email_verification_status;
 
-    @ColumnInfo(name = "phone_verification_status")
-    String phone_verification_status;
 
-    @ColumnInfo(name = "date_registered")
-    String date_registered;
+    public User() {
+    }
 
-    @ColumnInfo(name = "user_role")
-    String user_role;
-
-    public User(int user_id, int role_id, String firstname, String lastname, String email, String phone, String photo, String status, String email_verification_status, String phone_verification_status, String date_registered, String user_role) {
+    public User(int user_id, String firstname, String lastname, String email, String password, String photo, String status) {
         this.user_id = user_id;
-        this.role_id = role_id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.phone = phone;
+        this.password = password;
         this.photo = photo;
         this.status = status;
-        this.email_verification_status = email_verification_status;
-        this.phone_verification_status = phone_verification_status;
-        this.date_registered = date_registered;
-        this.user_role = user_role;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getUser_id() {
         return user_id;
-    }
-
-    public int getRole_id() {
-        return role_id;
     }
 
     public String getFirstname() {
@@ -80,8 +87,8 @@ public class User {
         return email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
 
     public String getPhoto() {
@@ -92,28 +99,6 @@ public class User {
         return status;
     }
 
-    public String getEmail_verification_status() {
-        return email_verification_status;
-    }
 
-    public String getPhone_verification_status() {
-        return phone_verification_status;
-    }
-
-    public String getDate_registered() {
-        return date_registered;
-    }
-
-    public String getUser_role() {
-        return user_role;
-    }
-
-    public int getRoom_user_id() {
-        return room_user_id;
-    }
-
-    public void setRoom_user_id(int room_user_id) {
-        this.room_user_id = room_user_id;
-    }
 }
 

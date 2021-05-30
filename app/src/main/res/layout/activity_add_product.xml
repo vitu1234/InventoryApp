@@ -8,13 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:elevation="8dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grey_100"
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -36,55 +38,62 @@
 
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_marginTop="30dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Product Category"
-            android:inputType="none"
-            android:drawableEnd="@drawable/arrow_tiangle_down_icon"
-            android:id="@+id/productCatN"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Product Name"
-            android:inputType="text"
-            android:id="@+id/prodName"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productCatN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:drawableEnd="@drawable/arrow_tiangle_down_icon"
+                android:hint="Product Category"
+                android:inputType="none" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Product Quantity"
-            android:inputType="number"
-            android:id="@+id/prodQty"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/prodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Product Name"
+                android:inputType="text" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Product Price (MWK)"
-            android:id="@+id/prodPrice"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/prodQty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Product Quantity"
+                android:inputType="number" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Product Description"
-            android:inputType="text"
-            android:lines="4"
-            android:id="@+id/prodDesc"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/prodPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Product Price (MWK)"
+                android:inputType="number" />
 
-        <com.google.android.material.button.MaterialButton
-            android:onClick="openScanActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/blue_300"
-            android:textColor="@color/white"
-            android:text="Next"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/prodDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Product Description"
+                android:inputType="text"
+                android:lines="4" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/blue_300"
+                android:onClick="openScanActivity"
+                android:text="Next"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

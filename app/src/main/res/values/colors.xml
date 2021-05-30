@@ -22,4 +22,6 @@
     <color name="red_100">#2FAF4C4C</color>
     <color name="red_200">#C6AF4C4C</color>
     <color name="red_300">#F3AF4C4C</color>
+
+    <color name="grey_100">#8BDFDFDF</color>
 </resources>

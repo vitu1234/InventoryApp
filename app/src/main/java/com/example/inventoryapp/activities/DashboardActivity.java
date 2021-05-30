@@ -1,5 +1,6 @@
 package com.example.inventoryapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.common.LoginActivity;
 import com.example.inventoryapp.fragments.DashboardFragment;
 import com.example.inventoryapp.fragments.ProductsMainFragment;
 import com.example.inventoryapp.models.User;
@@ -77,11 +79,11 @@ public class DashboardActivity extends AppCompatActivity {
                 } else if (position == 1) {
                     displayFragment(new ProductsMainFragment());
                 } else if (position == 2) {
-                    Toast.makeText(DashboardActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DashboardActivity.this, ProductCategoryActivity.class));
                 } else if (position == 3) {
                     Toast.makeText(DashboardActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
-                }else if (position == 4) {
-                    Toast.makeText(DashboardActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                } else if (position == 4) {
+                    logoutUser();
                 }
 
 
@@ -104,6 +106,12 @@ public class DashboardActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void logoutUser() {
+        sharedPrefManagera.logoutUser();
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        finish();
     }
 
     //hooking fragments

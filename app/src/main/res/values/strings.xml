@@ -8,4 +8,5 @@
     <string name="third_slide_desc">Have easy access to transactional and sales details</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="categories_txt">Categories</string>
 </resources>
