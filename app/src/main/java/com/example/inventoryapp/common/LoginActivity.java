@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.activities.DashboardActivity;
 import com.example.inventoryapp.models.User;
 import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.storage.SharedPrefManager;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 sharedPrefManager.saveUser(user);
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    startActivity(new Intent(getApplicationContext(), OnBoardingActivity.class));
+                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                     finish();
                 }, 800);
             } else {
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         } else {
             progressDialog.closeDialog();
-            progressDialog.showDangerAlert("Invalid user!");
+            progressDialog.showDangerAlert("Invalid credentials!");
         }
     }
 }

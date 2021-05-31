@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,11 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.inventoryapp.R;
 import com.example.inventoryapp.activities.DashboardActivity;
-import com.example.inventoryapp.models.User;
 import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.storage.SharedPrefManager;
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -97,11 +93,13 @@ public class SplashScreenActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         finish();
                     } else {
-                        if (room_db.userDao().countAllUsers() >0) {
+                        if (room_db.userDao().countAllUsers() > 0) {
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             finish();
-                        }else  startActivity(new Intent(getApplicationContext(), CreateAccountActivity.class));
-                        finish();
+                        } else {
+                            startActivity(new Intent(getApplicationContext(), CreateAccountActivity.class));
+                            finish();
+                        }
                     }
 
                 }
