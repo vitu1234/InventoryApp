@@ -18,8 +18,8 @@ public interface ProductDao {
     @Query("SELECT * FROM product WHERE product_id = :id")
     Product findByProductId(int id);
 
-    @Query("SELECT * FROM product WHERE product_name = :name")
-    Product findByProductName(String name);
+    @Query("SELECT * FROM product WHERE product_code = :code")
+    Product findByProductCode(String code);
 
     @Query("SELECT * FROM product WHERE category_id = :id")
     List<Product> findByProductWithCatId(int id);
@@ -45,6 +45,9 @@ public interface ProductDao {
     //count car
     @Query("SELECT * FROM product WHERE product_id = :id")
     int getSingleProductCount(int id);
+
+    @Query("SELECT COUNT(*) FROM product WHERE product_code = :code")
+    int getSingleProductCountByCode(String code);
 
     @Query("SELECT COUNT(*) FROM product WHERE category_id = :id")
     int getSingleProductCountByCategory(int id);

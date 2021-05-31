@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".fragments.RemoveProductBottomSheetFragment">
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="10dp"
+        android:background="@color/grey_100"
+        />
+    <com.google.android.material.textfield.TextInputEditText
+        android:textAlignment="center"
+        android:id="@+id/rmQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="Quantity to remove"
+        android:inputType="number" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:textAlignment="center"
+        android:id="@+id/product_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Product Code"
+        android:inputType="text" />
+    <com.google.android.material.button.MaterialButton
+        app:icon="@drawable/trash_icon"
+        app:iconGravity="textEnd"
+        android:id="@+id/btnRemoveProdCode"
+        android:backgroundTint="@color/red_300"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:text="Remove"/>
+</LinearLayout>

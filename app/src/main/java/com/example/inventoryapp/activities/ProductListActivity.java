@@ -2,10 +2,8 @@ package com.example.inventoryapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -40,12 +38,22 @@ public class ProductListActivity extends AppCompatActivity {
         room_db = AppDatabase.getDbInstance(this);
         Intent intent = getIntent();
         category_id = intent.getIntExtra("category_id", -1);
+        try {
+            setData();
+            initViews();
+        } catch (Exception e) {
+            finish();
+        }
 
-        setData();
-        initViews();
     }
 
     private void setData() {
+
+        if (category_id == -1) {
+            finish();
+
+        }
+
         productList = room_db.productDao().findByProductWithCatId(category_id);
 
         String category_name = room_db.categoryDao().findByCategoryId(category_id).getCategory_name();

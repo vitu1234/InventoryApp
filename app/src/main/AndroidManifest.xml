@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InventoryApp">
-        <activity android:name=".activities.ProductListActivity"></activity>
+        <activity android:name=".activities.RemoveProductActivity"></activity>
+        <activity android:name=".activities.ProductListActivity" />
         <activity android:name=".common.CreateAccountActivity" />
         <activity android:name=".common.LoginActivity" />
         <activity android:name=".activities.ProductCategoryActivity" />

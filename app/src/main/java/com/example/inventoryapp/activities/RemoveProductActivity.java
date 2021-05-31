@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.fragments.RemoveProductBottomSheetFragment;
 import com.example.inventoryapp.models.Product;
 import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.utils.MyProgressDialog;
@@ -24,10 +25,11 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
 
-public class ScanProductActivity extends AppCompatActivity {
+public class RemoveProductActivity extends AppCompatActivity {
     SurfaceView surfaceView;
     TextView txtBarcodeValue;
     private BarcodeDetector barcodeDetector;
@@ -35,36 +37,36 @@ public class ScanProductActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     String intentData = "";
 
-    AppDatabase room_db;
+    TextInputEditText textInputEditTextQty;
 
-    String product_name, category_name, product_description;
-    int category_id, product_quantity;
-    double product_price;
+    AppDatabase room_db;
 
     MyProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_product);
+        setContentView(R.layout.activity_remove_product);
+
         room_db = AppDatabase.getDbInstance(this);
         progressDialog = new MyProgressDialog(this);
 
-        Intent intent = getIntent();
-        product_name = intent.getStringExtra("product_name");
-        category_name = intent.getStringExtra("category_name");
-        category_id = intent.getIntExtra("category_id", -1);
-        product_description = intent.getStringExtra("product_description");
-        product_quantity = intent.getIntExtra("product_quantity", -1);
-        product_price = intent.getDoubleExtra("product_price", -1);
 
         initViews();
     }
 
+    public void showScanView(View view) {
+        cameraSource.stop();
+        RemoveProductBottomSheetFragment bottomSheetFragment = new RemoveProductBottomSheetFragment();
+        bottomSheetFragment.setAllowEnterTransitionOverlap(true);
+        bottomSheetFragment.show(this.getSupportFragmentManager(), bottomSheetFragment.getTag());
+    }
 
     private void initViews() {
-        txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
-        surfaceView = findViewById(R.id.surfaceView);
+        txtBarcodeValue = findViewById(R.id.txtBarcodeValueRemove);
+        surfaceView = findViewById(R.id.surfaceViewRemove);
+        textInputEditTextQty = findViewById(R.id.rmQuantity);
+        textInputEditTextQty.setText(1 + "");
     }
 
     private void initialiseDetectorsAndSources() {
@@ -84,10 +86,10 @@ public class ScanProductActivity extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    if (ActivityCompat.checkSelfPermission(ScanProductActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(RemoveProductActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(surfaceView.getHolder());
                     } else {
-                        ActivityCompat.requestPermissions(ScanProductActivity.this, new
+                        ActivityCompat.requestPermissions(RemoveProductActivity.this, new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                     }
 
@@ -134,7 +136,7 @@ public class ScanProductActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     progressDialog.closeDialog();
-                                    addProduct(intentData);
+                                    removeProduct(intentData);
 
                                 }
                             }, 1000);
@@ -148,34 +150,44 @@ public class ScanProductActivity extends AppCompatActivity {
         });
     }
 
-    private void addProduct(String product_code) {
+    private void removeProduct(String product_code) {
+        if (textInputEditTextQty.getText().toString().isEmpty()) {
+            textInputEditTextQty.setError("Required field");
+            return;
+        }
         //check if product exist
-        if (room_db.productDao().getSingleProductCountByNameCatId(product_name, category_id) == 0) {
-            Product product = new Product();
-            product.setCategory_id(category_id);
-            product.setPrice(product_price);
-            product.setProduct_code(product_code);
-            product.setProduct_description(product_description);
-            product.setProduct_name(product_name);
-            product.setQuantity(product_quantity);
+        if (room_db.productDao().getSingleProductCountByCode(product_code) > 0) {
+            Product product = room_db.productDao().findByProductCode(product_code);
+            Product product1 = new Product();
 
-            room_db.productDao().insertProduct(product);
-            progressDialog.showSuccessAlert("Added, please wait!");
+            product1.setProduct_id(product.getProduct_id());
+            product1.setCategory_id(product.getCategory_id());
+            product1.setPrice(product.getPrice());
+            product1.setProduct_code(product_code);
+            product1.setProduct_description(product.getProduct_description());
+            product1.setProduct_name(product.getProduct_name());
+            product1.setQuantity((product.getQuantity() - Integer.parseInt(textInputEditTextQty.getText().toString())));
+
+            room_db.productDao().updateProduct(product1);
+
+            progressDialog.showSuccessAlert("Removed, please wait!");
 
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     progressDialog.closeDialog();
-                    Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
-                    intent.putExtra("category_id",category_id);
+                    startActivity(new Intent(getApplicationContext(), ProductListActivity.class));
+                    Intent intent = new Intent(RemoveProductActivity.this, ProductListActivity.class);
+                    intent.putExtra("category_id", product.getCategory_id());
                     startActivity(intent);
-                    finish();
 
                 }
             }, 1000);
         } else {
-            progressDialog.showDangerAlert("Product with same name and category already exists!");
+            progressDialog.showDangerAlert("item with that code not found, try entering manually or adding it first!");
         }
+
+
     }
 
 
@@ -191,4 +203,7 @@ public class ScanProductActivity extends AppCompatActivity {
         initialiseDetectorsAndSources();
     }
 
+    public void removeProd(View view) {
+        onBackPressed();
+    }
 }

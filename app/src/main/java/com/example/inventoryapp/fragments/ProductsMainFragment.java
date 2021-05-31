@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventoryapp.R;
 import com.example.inventoryapp.activities.AddProductActivity;
+import com.example.inventoryapp.activities.RemoveProductActivity;
 import com.example.inventoryapp.adapters.recyclers.CategoriesProductsListAdapter;
 import com.example.inventoryapp.models.Category;
 import com.example.inventoryapp.room_db.AppDatabase;
@@ -33,6 +34,7 @@ public class ProductsMainFragment extends Fragment {
     List<Category> categoryList;
 
     TextView textViewproductsCount;
+    ImageView imageViewRemoveProd;
 
     public ProductsMainFragment() {
         // Required empty public constructor
@@ -55,10 +57,14 @@ public class ProductsMainFragment extends Fragment {
         room_db = AppDatabase.getDbInstance(this.getContext());
         textViewproductsCount = view.findViewById(R.id.productsCount);
 
+        imageViewRemoveProd = view.findViewById(R.id.removeProdBtn);
+
         innitViews();
 
         recyclerData();
         imageViewScan.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
+        imageViewRemoveProd.setOnClickListener(v -> startActivity(new Intent(getActivity(), RemoveProductActivity.class)));
+
         return view;
     }
 
