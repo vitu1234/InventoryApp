@@ -1,4 +1,4 @@
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,10 +12,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:elevation="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/grey_100"
+            android:elevation="8dp"
             android:padding="16dp">
 
             <ImageView
@@ -45,6 +45,10 @@
             android:padding="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:clickable="true"
+                android:focusable="false"
+
+                android:onClick="showList"
                 android:id="@+id/productCatN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,6 +91,7 @@
                 android:lines="4" />
 
             <com.google.android.material.button.MaterialButton
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -96,4 +101,4 @@
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

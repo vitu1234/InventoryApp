@@ -72,4 +72,11 @@ dependencies {
     implementation 'eu.davidea:flexible-adapter-livedata:1.0.0-b3'
     // From 1.0.0-b3, library is compiled with data binding v2
     implementation 'eu.davidea:flexible-adapter-databinding:1.0.0'
+
+    //dialog filter
+    implementation 'com.github.barisatalay:filter-dialog-activity:1.0.21'
+
+    //barcode scanner
+    implementation 'com.google.android.gms:play-services-vision:11.8.0'
+
 }
