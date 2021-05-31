@@ -77,4 +77,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
 
     }
 
+    public void goBakc(View view) {
+        onBackPressed();
+    }
 }

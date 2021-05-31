@@ -21,8 +21,9 @@ public interface ProductDao {
     @Query("SELECT * FROM product WHERE product_name = :name")
     Product findByProductName(String name);
 
-    @Query("SELECT * FROM product WHERE product_name = :name AND category_id = :id")
-    Product findByProductNameWithCatId(String name, int id);
+    @Query("SELECT * FROM product WHERE category_id = :id")
+    List<Product> findByProductWithCatId(int id);
+
 
     //    @Insert(onConflict = OnConflictStrategy.REPLACE)
     @Insert()
@@ -42,10 +43,13 @@ public interface ProductDao {
     void deleteAllProducts();
 
     //count car
-    @Query("SELECT * FROM Product WHERE product_id = :id")
+    @Query("SELECT * FROM product WHERE product_id = :id")
     int getSingleProductCount(int id);
 
-    @Query("SELECT * FROM Product WHERE product_name = :name AND category_id = :id")
+    @Query("SELECT COUNT(*) FROM product WHERE category_id = :id")
+    int getSingleProductCountByCategory(int id);
+
+    @Query("SELECT * FROM product WHERE product_name = :name AND category_id = :id")
     int getSingleProductCountByNameCatId(String name, int id);
 
     //count all car

@@ -2,9 +2,7 @@ package com.example.inventoryapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,26 +15,14 @@ import com.example.inventoryapp.R;
 import com.example.inventoryapp.common.LoginActivity;
 import com.example.inventoryapp.fragments.DashboardFragment;
 import com.example.inventoryapp.fragments.ProductsMainFragment;
-import com.example.inventoryapp.models.User;
 import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.storage.SharedPrefManager;
-import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    //    ?DRAWER MENU
-    static final float END_SCALE = 0.7f;
-    NavigationView navigationView;
-    ImageView menu_icon;
     LinearLayout contentView;
-    TextView textVietitle;
     SharedPrefManager sharedPrefManagera;
     BottomNavigationBar bottomNavigationBar;
-
-    List<User> userList;
-
     AppDatabase room_db;
 
 
@@ -64,8 +50,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.home_icon, "Home"))
-                .addItem(new BottomNavigationItem(R.drawable.products_icon, "Products"))
                 .addItem(new BottomNavigationItem(R.drawable.folder_icon, "Categories"))
+                .addItem(new BottomNavigationItem(R.drawable.products_icon, "Products"))
                 .addItem(new BottomNavigationItem(R.drawable.settings_icon, "Settings"))
                 .addItem(new BottomNavigationItem(R.drawable.logout_icon, "Logout"))
                 .setFirstSelectedPosition(0)
@@ -76,9 +62,9 @@ public class DashboardActivity extends AppCompatActivity {
             public void onTabSelected(int position) {
                 if (position == 0) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment(), null).commit();
-                } else if (position == 1) {
-                    displayFragment(new ProductsMainFragment());
                 } else if (position == 2) {
+                    displayFragment(new ProductsMainFragment());
+                } else if (position == 1) {
                     startActivity(new Intent(DashboardActivity.this, ProductCategoryActivity.class));
                 } else if (position == 3) {
                     Toast.makeText(DashboardActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.inventoryapp.R;
-import com.example.inventoryapp.common.OnBoardingActivity;
 import com.example.inventoryapp.models.Product;
 import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.utils.MyProgressDialog;
@@ -131,7 +129,17 @@ public class ScanProductActivity extends AppCompatActivity {
                             intentData = barcodes.valueAt(0).displayValue;
                             txtBarcodeValue.setText(intentData);
                             surfaceView.setVisibility(View.GONE);
-                            addProduct(intentData);
+                            cameraSource.stop();
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.closeDialog();
+                                    addProduct(intentData);
+
+                                }
+                            }, 1000);
+
+
                         }
                     });
 
@@ -153,7 +161,6 @@ public class ScanProductActivity extends AppCompatActivity {
 
             room_db.productDao().insertProduct(product);
             progressDialog.showSuccessAlert("Added, please wait!");
-            Log.e("e", String.valueOf(room_db.productDao().countAllProducts()));
 
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
