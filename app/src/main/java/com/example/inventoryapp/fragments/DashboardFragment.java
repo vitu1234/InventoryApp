@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.room_db.AppDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,10 @@ public class DashboardFragment extends Fragment {
     private int maxNumberOfLines = 4;
     private int numberOfPoints = 12;
 
+    TextView textViewCountProductsIn;
+
+    AppDatabase room_db;
+
     float[][] randomNumbersTab = new float[maxNumberOfLines][numberOfPoints];
 
     private boolean hasAxes = true;
@@ -75,10 +81,13 @@ public class DashboardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        room_db = AppDatabase.getDbInstance(this.getContext());
 
         chart = view.findViewById(R.id.chart);
+        textViewCountProductsIn = view.findViewById(R.id.textViewCountProductsIn);
         chart.setOnValueTouchListener(new ValueTouchListener());
 
+        textViewCountProductsIn.setText(room_db.productDao().countAllProducts()+" ");
 
         // Generate some random values.
         generateValues();
@@ -162,7 +171,7 @@ public class DashboardFragment extends Fragment {
             Axis axisY = new Axis().setHasLines(true);
             if (hasAxesNames) {
                 axisX.setName("Day of the week");
-                axisY.setName("Quantity");
+                axisY.setName("Total Products");
             }
             data.setAxisXBottom(axisX);
             data.setAxisYLeft(axisY);

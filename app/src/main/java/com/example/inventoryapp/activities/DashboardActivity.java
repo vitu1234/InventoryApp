@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -25,9 +24,6 @@ public class DashboardActivity extends AppCompatActivity {
     BottomNavigationBar bottomNavigationBar;
     AppDatabase room_db;
 
-
-    SwipeRefreshLayout swipeRefreshLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +32,6 @@ public class DashboardActivity extends AppCompatActivity {
         room_db = AppDatabase.getDbInstance(this);
         sharedPrefManagera = new SharedPrefManager(getApplicationContext());
 
-        swipeRefreshLayout = findViewById(R.id.swipeHome);
-        swipeRefreshLayout.setSoundEffectsEnabled(true);
         contentView = findViewById(R.id.content);
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
 
@@ -67,7 +61,7 @@ public class DashboardActivity extends AppCompatActivity {
                 } else if (position == 1) {
                     startActivity(new Intent(DashboardActivity.this, ProductCategoryActivity.class));
                 } else if (position == 3) {
-                    Toast.makeText(DashboardActivity.this, "Coming soon", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DashboardActivity.this, SettingsActivity.class));
                 } else if (position == 4) {
                     logoutUser();
                 }
@@ -84,14 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
 
-                swipeRefreshLayout.setRefreshing(false);
-
-            }
-        });
     }
 
     private void logoutUser() {
@@ -103,5 +90,13 @@ public class DashboardActivity extends AppCompatActivity {
     //hooking fragments
     private void displayFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, null).addToBackStack(null).commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportFragmentManager().beginTransaction().remove(new DashboardFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment(), null).commit();
+        bottomNavigationBar.selectTab(0);
     }
 }

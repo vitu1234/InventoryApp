@@ -1,0 +1,348 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grey_100"
+            android:elevation="8dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:padding="5dp"
+                android:src="@drawable/arrow_back_icon"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:gravity="center_vertical"
+                android:text="Settings "
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp"
+                android:src="@drawable/export_icon"
+                app:tint="@color/black" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:text="Profile"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+
+                android:id="@+id/relative2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/ww"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_centerInParent="true">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/view2"
+                            android:layout_width="160dp"
+                            android:layout_height="160dp"
+                            android:layout_centerHorizontal="true"
+                            android:elevation="12dp"
+                            android:innerRadius="0dp"
+                            android:shape="ring"
+                            app:cardCornerRadius="40dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profile_user_pic"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_gravity="center"
+                                android:src="@drawable/person_icon" />
+                        </androidx.cardview.widget.CardView>
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fab_add_profilephoto"
+                            style="@style/FabStyle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearBtns"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ww"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/profile_driver_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="@font/amiko"
+                            android:text="Vitu Mafeni"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/profile_driver_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/profile_driver_name"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="0888299293"
+                            android:textSize="12sp"
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/profile_driver_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/profile_driver_phone"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="mafeniblessed@gmail.com"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/order_detail_line1"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@+id/profile_driver_email"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/blue_700" />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/phoneLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/order_detail_line1"
+                            android:layout_marginTop="20dp"
+                            android:hint="Change Email"
+                            android:paddingLeft="16dp"
+                            android:paddingEnd="16dp"
+                            app:boxStrokeColor="#000"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:startIconDrawable="@drawable/email_icon"
+                            app:startIconTint="#000">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/new_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:inputType="textEmailAddress"
+                                android:textColor="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/changPhoneBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/phoneLayout"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="50dp"
+                            android:backgroundTint="@color/blue_700"
+                            android:minHeight="40dp"
+                            android:padding="10dp"
+
+                            android:text="Change Email"
+                            android:textColor="@color/white" />
+
+
+                        <TextView
+                            android:id="@+id/order_detail_line2"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_below="@+id/changPhoneBtn"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/blue_700" />
+
+
+                        <TextView
+                            android:id="@+id/change_pwd_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/order_detail_line2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/roboto_mono_bold"
+                            android:text="Change Password"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/passwordLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/change_pwd_title"
+                            android:layout_marginTop="20dp"
+                            android:hint="Current Password"
+                            android:paddingLeft="16dp"
+                            android:paddingEnd="16dp"
+                            app:boxStrokeColor="#000"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="password_toggle"
+                            app:startIconDrawable="@drawable/lock_icon"
+                            app:startIconTint="#000">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/current_pwd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:inputType="textPassword"
+                                android:textColor="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/passwordLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/passwordLayout"
+                            android:layout_marginTop="20dp"
+                            android:hint="New Password"
+                            android:paddingLeft="16dp"
+                            android:paddingEnd="16dp"
+                            app:boxStrokeColor="#000"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="password_toggle"
+                            app:startIconDrawable="@drawable/lock_icon"
+                            app:startIconTint="#000">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/new_pwd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:inputType="textPassword"
+                                android:textColor="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/passwordLayout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/passwordLayout2"
+                            android:layout_marginTop="20dp"
+                            android:hint="Confirm Password"
+                            android:paddingLeft="16dp"
+                            android:paddingEnd="16dp"
+                            app:boxStrokeColor="#000"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="password_toggle"
+                            app:startIconDrawable="@drawable/lock_icon"
+                            app:startIconTint="#000">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/con_pwd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:inputType="textPassword"
+                                android:textColor="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/changPwdBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/passwordLayout3"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="50dp"
+                            android:backgroundTint="@color/blue_700"
+                            android:minHeight="40dp"
+                            android:padding="10dp"
+                            android:text="Change Password"
+                            android:textColor="@color/white" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/roboto_mono_bold"
+            android:text="Advanced"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red_300"
+            android:text="Reset App &amp; Data"
+            app:icon="@drawable/settings_icon"
+            app:iconGravity="textStart" />
+    </LinearLayout>
+</ScrollView>

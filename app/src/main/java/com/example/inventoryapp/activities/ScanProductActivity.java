@@ -37,7 +37,7 @@ public class ScanProductActivity extends AppCompatActivity {
 
     AppDatabase room_db;
 
-    String product_name, category_name, product_description;
+    String product_name, category_name, product_description, brand_name;
     int category_id, product_quantity;
     double product_price;
 
@@ -52,6 +52,7 @@ public class ScanProductActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         product_name = intent.getStringExtra("product_name");
+        brand_name = intent.getStringExtra("brand_name");
         category_name = intent.getStringExtra("category_name");
         category_id = intent.getIntExtra("category_id", -1);
         product_description = intent.getStringExtra("product_description");
@@ -156,6 +157,7 @@ public class ScanProductActivity extends AppCompatActivity {
             product.setPrice(product_price);
             product.setProduct_code(product_code);
             product.setProduct_description(product_description);
+            product.setBrand_name(brand_name);
             product.setProduct_name(product_name);
             product.setQuantity(product_quantity);
 

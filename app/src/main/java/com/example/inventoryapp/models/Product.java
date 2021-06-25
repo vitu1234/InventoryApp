@@ -30,6 +30,8 @@ public class Product {
 
     @ColumnInfo(name = "product_name")
     String product_name;
+    @ColumnInfo(name = "brand_name")
+    String brand_name;
 
     @ColumnInfo(name = "product_code")
     String product_code;
@@ -41,12 +43,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(int product_id, int category_id, int quantity, double price, String product_name, String product_code, String product_description) {
+    public Product(int product_id, int category_id, int quantity, double price, String product_name, String brand_name, String product_code, String product_description) {
         this.product_id = product_id;
         this.category_id = category_id;
         this.quantity = quantity;
         this.price = price;
         this.product_name = product_name;
+        this.brand_name = brand_name;
         this.product_code = product_code;
         this.product_description = product_description;
     }
@@ -89,6 +92,14 @@ public class Product {
 
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
+    }
+
+    public String getBrand_name() {
+        return brand_name;
+    }
+
+    public void setBrand_name(String brand_name) {
+        this.brand_name = brand_name;
     }
 
     public String getProduct_code() {

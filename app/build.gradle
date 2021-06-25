@@ -77,6 +77,10 @@ dependencies {
     implementation 'com.github.barisatalay:filter-dialog-activity:1.0.21'
 
     //barcode scanner
-    implementation 'com.google.android.gms:play-services-vision:11.8.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+
+    //CIRCLER imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 }

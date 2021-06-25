@@ -25,7 +25,7 @@ public class AddProductActivity extends AppCompatActivity {
     int category_id;
 
     TextInputEditText textInputEditTextCatName, textInputEditTextProdName,
-            textInputEditTextProdQuantity, textInputEditTextProdPrice, textInputEditTextProdDesc;
+            textInputEditTextProdQuantity, textInputEditTextProdPrice, textInputEditTextProdDesc, textInputEditTextBrandName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +38,14 @@ public class AddProductActivity extends AppCompatActivity {
         textInputEditTextProdQuantity = findViewById(R.id.prodQty);
         textInputEditTextProdPrice = findViewById(R.id.prodPrice);
         textInputEditTextProdDesc = findViewById(R.id.prodDesc);
+        textInputEditTextBrandName = findViewById(R.id.proBrandName);
 
     }
 
     public void openScanActivity(View view) {
         String category_name = textInputEditTextCatName.getText().toString();
         String product_name = textInputEditTextProdName.getText().toString();
-
+        String brand_name = textInputEditTextBrandName.getText().toString();
         String description = textInputEditTextProdDesc.getText().toString();
 
         if (category_name.isEmpty()) {
@@ -68,6 +69,11 @@ public class AddProductActivity extends AppCompatActivity {
             return;
         }
 
+        if (textInputEditTextBrandName.getText().toString().isEmpty()) {
+            textInputEditTextBrandName.setError("Required field");
+            return;
+        }
+
         int quantity = Integer.parseInt(textInputEditTextProdQuantity.getText().toString());
         double price = Double.parseDouble(textInputEditTextProdPrice.getText().toString());
 
@@ -78,6 +84,7 @@ public class AddProductActivity extends AppCompatActivity {
         intent.putExtra("product_quantity", quantity);
         intent.putExtra("product_price", price);
         intent.putExtra("product_description", description);
+        intent.putExtra("brand_name", description);
         startActivity(intent);
         finish();
     }

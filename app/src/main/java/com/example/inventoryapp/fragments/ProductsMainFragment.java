@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventoryapp.R;
 import com.example.inventoryapp.activities.AddProductActivity;
+import com.example.inventoryapp.activities.ImportProductsActivity;
 import com.example.inventoryapp.activities.RemoveProductActivity;
 import com.example.inventoryapp.adapters.recyclers.CategoriesProductsListAdapter;
 import com.example.inventoryapp.models.Category;
@@ -34,7 +35,7 @@ public class ProductsMainFragment extends Fragment {
     List<Category> categoryList;
 
     TextView textViewproductsCount;
-    ImageView imageViewRemoveProd;
+    ImageView imageViewRemoveProd, imageViewattachCSV;
 
     public ProductsMainFragment() {
         // Required empty public constructor
@@ -56,7 +57,7 @@ public class ProductsMainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.productsMainRecycler);
         room_db = AppDatabase.getDbInstance(this.getContext());
         textViewproductsCount = view.findViewById(R.id.productsCount);
-
+        imageViewattachCSV = view.findViewById(R.id.importIcon);
         imageViewRemoveProd = view.findViewById(R.id.removeProdBtn);
 
         innitViews();
@@ -64,6 +65,7 @@ public class ProductsMainFragment extends Fragment {
         recyclerData();
         imageViewScan.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         imageViewRemoveProd.setOnClickListener(v -> startActivity(new Intent(getActivity(), RemoveProductActivity.class)));
+        imageViewattachCSV.setOnClickListener(v -> startActivity(new Intent(getActivity(), ImportProductsActivity.class)));
 
         return view;
     }
@@ -87,6 +89,7 @@ public class ProductsMainFragment extends Fragment {
         return list;
 
     }
+
 
     public void recyclerData() {
         if (room_db.categoryDao().countAllCategorys() > 0) {
