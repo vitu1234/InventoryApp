@@ -38,6 +38,9 @@ public interface CategoryDao {
     @Query("DELETE FROM Category")
     void deleteAllCategorys();
 
+    @Query("DELETE FROM Category WHERE category_id = :id")
+    void deleteCategory(int id);
+
     //count car
     @Query("SELECT * FROM Category WHERE category_id = :id")
     int getSingleCategoryCount(int id);

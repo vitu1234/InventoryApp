@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import com.example.inventoryapp.R;
 import com.example.inventoryapp.fragments.RemoveProductBottomSheetFragment;
 import com.example.inventoryapp.models.Product;
+import com.example.inventoryapp.models.RemovedProduct;
 import com.example.inventoryapp.room_db.AppDatabase;
 import com.example.inventoryapp.utils.MyProgressDialog;
 import com.google.android.gms.vision.CameraSource;
@@ -131,6 +132,7 @@ public class RemoveProductActivity extends AppCompatActivity {
                             intentData = barcodes.valueAt(0).displayValue;
                             txtBarcodeValue.setText(intentData);
                             surfaceView.setVisibility(View.GONE);
+                            cameraSource.release();
                             cameraSource.stop();
                             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                 @Override
@@ -159,6 +161,8 @@ public class RemoveProductActivity extends AppCompatActivity {
         if (room_db.productDao().getSingleProductCountByCode(product_code) > 0) {
             Product product = room_db.productDao().findByProductCode(product_code);
             Product product1 = new Product();
+            RemovedProduct removedProduct = new RemovedProduct();
+
 
             product1.setProduct_id(product.getProduct_id());
             product1.setCategory_id(product.getCategory_id());
@@ -168,21 +172,54 @@ public class RemoveProductActivity extends AppCompatActivity {
             product1.setProduct_name(product.getProduct_name());
             product1.setQuantity((product.getQuantity() - Integer.parseInt(textInputEditTextQty.getText().toString())));
 
-            room_db.productDao().updateProduct(product1);
+            removedProduct.setProduct_id(product.getProduct_id());
+            removedProduct.setCategory_id(product.getCategory_id());
+            removedProduct.setPrice(product.getPrice());
+            removedProduct.setProduct_code(product_code);
+            removedProduct.setProduct_description(product.getProduct_description());
+            removedProduct.setProduct_name(product.getProduct_name());
+            removedProduct.setQuantity((Integer.parseInt(textInputEditTextQty.getText().toString())));
 
-            progressDialog.showSuccessAlert("Removed, please wait!");
+            if (product.getQuantity() >= Integer.parseInt(textInputEditTextQty.getText().toString())) {
 
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
+
+                room_db.productDao().updateProduct(product1);
+
+                //check if product exists in the checkedout
+                if (room_db.productRemoveDao().countByProductCode(product_code) > 0) {
+                    //get current values
+                    RemovedProduct removedProduct1 = room_db.productRemoveDao().findByProductCode(product_code);
+                    int qtyDb = removedProduct.getQuantity();
+                    int newQty = Integer.parseInt(textInputEditTextQty.getText().toString()) + qtyDb;
+                    //update the product
+                    removedProduct1.setProduct_id(product.getProduct_id());
+                    removedProduct1.setCategory_id(product.getCategory_id());
+                    removedProduct1.setPrice(product.getPrice());
+                    removedProduct1.setProduct_code(product_code);
+                    removedProduct1.setProduct_description(product.getProduct_description());
+                    removedProduct1.setProduct_name(product.getProduct_name());
+                    removedProduct1.setQuantity(newQty);
+                    room_db.productRemoveDao().updateProduct(removedProduct);
+                } else {
+                    room_db.productRemoveDao().insertProduct(removedProduct);
+                }
+
+
+                progressDialog.showSuccessAlert("Removed, please wait!");
+
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     progressDialog.closeDialog();
                     startActivity(new Intent(getApplicationContext(), ProductListActivity.class));
                     Intent intent = new Intent(RemoveProductActivity.this, ProductListActivity.class);
                     intent.putExtra("category_id", product.getCategory_id());
                     startActivity(intent);
 
-                }
-            }, 1000);
+                }, 1000);
+            } else {
+                Toast.makeText(this, "Remaining products are less than the quantity entered!", Toast.LENGTH_SHORT).show();
+            }
+
+
         } else {
             progressDialog.showDangerAlert("item with that code not found, try entering manually or adding it first!");
         }

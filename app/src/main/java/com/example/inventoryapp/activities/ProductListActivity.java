@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventoryapp.R;
 import com.example.inventoryapp.adapters.recyclers.ProductListAdapter;
+import com.example.inventoryapp.fragments.AddCategoryBottomSheetFragment;
+import com.example.inventoryapp.fragments.EditCategoryBottomSheetFragment;
 import com.example.inventoryapp.models.Product;
 import com.example.inventoryapp.room_db.AppDatabase;
 
@@ -45,6 +47,13 @@ public class ProductListActivity extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setData();
+        initViews();
     }
 
     private void setData() {
@@ -98,5 +107,14 @@ public class ProductListActivity extends AppCompatActivity {
     public void openAddProduct(View view) {
         Intent intent = new Intent(ProductListActivity.this, AddProductActivity.class);
         startActivity(intent);
+    }
+
+    public void editCategory(View view) {
+        EditCategoryBottomSheetFragment bottomSheetFragment = new EditCategoryBottomSheetFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("category_id", category_id);
+        bottomSheetFragment.setArguments(bundle);
+        bottomSheetFragment.setAllowEnterTransitionOverlap(true);
+        bottomSheetFragment.show(this.getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
 }

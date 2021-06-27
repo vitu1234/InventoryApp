@@ -69,8 +69,8 @@ public class ProductCategoryActivity extends AppCompatActivity {
         for (int i = 0; i < categoryList.size(); i++) {
             String category_name = categoryList.get(i).getCategory_name();
             int category_id = categoryList.get(i).getCategory_id();
-
-            list.add(new CategoriesAdapter(String.valueOf(i), category_name, category_id));
+            int prodCount = room_db.productDao().countProductsByCategory(category_id);
+            list.add(new CategoriesAdapter(String.valueOf(i), category_name, category_id, prodCount));
 
         }
         return list;

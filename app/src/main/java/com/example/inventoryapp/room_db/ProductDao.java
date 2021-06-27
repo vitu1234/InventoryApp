@@ -42,6 +42,9 @@ public interface ProductDao {
     @Query("DELETE FROM product")
     void deleteAllProducts();
 
+    @Query("DELETE FROM product WHERE product_id =:id")
+    void deleteProductById(int id);
+
     //count car
     @Query("SELECT * FROM product WHERE product_id = :id")
     int getSingleProductCount(int id);
@@ -58,4 +61,7 @@ public interface ProductDao {
     //count all car
     @Query("SELECT COUNT(*) FROM product ")
     int countAllProducts();
+
+    @Query("SELECT COUNT(*) FROM product WHERE category_id =:id ")
+    int countProductsByCategory(int id);
 }

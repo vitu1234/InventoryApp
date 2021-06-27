@@ -4,14 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
     android:elevation="5dp"
+    android:padding="16dp"
     app:layoutDescription="@xml/recycler_category_line_scene">
 
     <TextView
         android:layout_alignParentStart="true"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/roboto_mono_bold"
         android:id="@+id/textViewCatName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" android:textColor="@color/black" />
+    <TextView
+        android:textSize="12sp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/roboto"
+        android:id="@+id/textViewProdCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" android:textColor="@color/black" />

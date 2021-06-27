@@ -1,0 +1,182 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ViewEditProductActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grey_100"
+            android:elevation="8dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:onClick="goBackStep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="5dp"
+                android:src="@drawable/arrow_back_icon"
+                app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/roboto_mono_bold"
+                android:gravity="center_vertical"
+                android:text="View | Edit Product"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eproductCatN"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableEnd="@drawable/arrow_tiangle_down_icon"
+                android:focusable="true"
+                android:hint="Product Category"
+                android:inputType="none"
+                android:onClick="showList" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Product Code" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eproCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Code"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Brand Name" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eproBrandName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Brand Name"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Product Name" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eprodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Name"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Product Quantity" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eprodQty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Quantity"
+                android:inputType="number" />
+
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Product Price(MWK)" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eprodPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Price (MWK)"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Product Description" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eprodDesc"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Description"
+                android:inputType="textMultiLine" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue_300"
+                    android:onClick="saveProduct"
+                    android:text="Update"
+                    android:textColor="@color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/red_300"
+                    android:onClick="deleteProduct"
+                    android:text="Delete"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

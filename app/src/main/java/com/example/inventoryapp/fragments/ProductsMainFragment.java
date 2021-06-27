@@ -34,7 +34,7 @@ public class ProductsMainFragment extends Fragment {
     AppDatabase room_db;
     List<Category> categoryList;
 
-    TextView textViewproductsCount;
+    TextView textViewproductsCount, textViewRemoved;
     ImageView imageViewRemoveProd, imageViewattachCSV;
 
     public ProductsMainFragment() {
@@ -57,8 +57,10 @@ public class ProductsMainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.productsMainRecycler);
         room_db = AppDatabase.getDbInstance(this.getContext());
         textViewproductsCount = view.findViewById(R.id.productsCount);
+        textViewRemoved = view.findViewById(R.id.productsStockCount);
         imageViewattachCSV = view.findViewById(R.id.importIcon);
         imageViewRemoveProd = view.findViewById(R.id.removeProdBtn);
+
 
         innitViews();
 
@@ -73,6 +75,7 @@ public class ProductsMainFragment extends Fragment {
     private void innitViews() {
         int countProducts = room_db.productDao().countAllProducts();
         textViewproductsCount.setText(countProducts + "");
+        textViewRemoved.setText(""+room_db.productRemoveDao().countAllProducts());
     }
 
     public List<IFlexible> getDatabaseList() {

@@ -22,7 +22,7 @@ public class AddProductActivity extends AppCompatActivity {
     AppDatabase room_db;
     List<Category> categoryList;
     String category_name;
-    int category_id;
+    int category_id = -1;
 
     TextInputEditText textInputEditTextCatName, textInputEditTextProdName,
             textInputEditTextProdQuantity, textInputEditTextProdPrice, textInputEditTextProdDesc, textInputEditTextBrandName;

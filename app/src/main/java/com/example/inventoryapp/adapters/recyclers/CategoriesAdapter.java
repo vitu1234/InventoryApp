@@ -1,12 +1,14 @@
 package com.example.inventoryapp.adapters.recyclers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.activities.ProductListActivity;
 
 import java.util.List;
 
@@ -18,12 +20,13 @@ import eu.davidea.viewholders.FlexibleViewHolder;
 public class CategoriesAdapter extends AbstractFlexibleItem<CategoriesAdapter.MyViewHolder> {
 
     private String id, category_name;
-    private int category_id;
+    private int category_id, productsInCat;
 
-    public CategoriesAdapter(String id, String category_name, int category_id) {
+    public CategoriesAdapter(String id, String category_name, int category_id, int productsInCat) {
         this.id = id;
         this.category_name = category_name;
         this.category_id = category_id;
+        this.productsInCat = productsInCat;
     }
 
     @Override
@@ -55,6 +58,7 @@ public class CategoriesAdapter extends AbstractFlexibleItem<CategoriesAdapter.My
                                int position,
                                List<Object> payloads) {
         holder.textViewCatname.setText(category_name);
+        holder.textViewProdCount.setText("Products: " + productsInCat);
 
 
         // Title appears disabled if item is disabled
@@ -62,7 +66,9 @@ public class CategoriesAdapter extends AbstractFlexibleItem<CategoriesAdapter.My
             @Override
             public void onClick(View v) {
                 Context context1 = v.getContext();
-//                context1.startActivity(new Intent(context1, TripDetailsActivity.class));
+                Intent intent = new Intent(context1, ProductListActivity.class);
+                intent.putExtra("category_id", category_id);
+                context1.startActivity(intent);
             }
         });
     }
@@ -74,13 +80,13 @@ public class CategoriesAdapter extends AbstractFlexibleItem<CategoriesAdapter.My
      */
     public class MyViewHolder extends FlexibleViewHolder {
 
-        public TextView textViewCatname;
+        public TextView textViewCatname, textViewProdCount;
 
 
         public MyViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter);
             textViewCatname = (TextView) view.findViewById(R.id.textViewCatName);
-
+            textViewProdCount = view.findViewById(R.id.textViewProdCount);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

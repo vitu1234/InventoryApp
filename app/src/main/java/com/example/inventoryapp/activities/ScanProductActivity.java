@@ -151,7 +151,7 @@ public class ScanProductActivity extends AppCompatActivity {
 
     private void addProduct(String product_code) {
         //check if product exist
-        if (room_db.productDao().getSingleProductCountByNameCatId(product_name, category_id) == 0) {
+        if (room_db.productDao().getSingleProductCountByCode(product_code) == 0) {
             Product product = new Product();
             product.setCategory_id(category_id);
             product.setPrice(product_price);
@@ -163,13 +163,14 @@ public class ScanProductActivity extends AppCompatActivity {
 
             room_db.productDao().insertProduct(product);
             progressDialog.showSuccessAlert("Added, please wait!");
+            cameraSource.release();
 
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     progressDialog.closeDialog();
                     Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
-                    intent.putExtra("category_id",category_id);
+                    intent.putExtra("category_id", category_id);
                     startActivity(intent);
                     finish();
 

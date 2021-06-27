@@ -26,6 +26,7 @@
             app:tint="@color/black" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:id="@+id/pgTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +36,14 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-
+        <ImageView
+            android:onClick="editCategory"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:src="@drawable/edit_icon"
+            app:tint="@color/black" />
     </RelativeLayout>
 
 

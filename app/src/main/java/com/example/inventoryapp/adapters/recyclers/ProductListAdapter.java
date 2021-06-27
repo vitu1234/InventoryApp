@@ -1,12 +1,14 @@
 package com.example.inventoryapp.adapters.recyclers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventoryapp.R;
+import com.example.inventoryapp.activities.ViewEditProductActivity;
 
 import java.util.List;
 
@@ -68,7 +70,9 @@ public class ProductListAdapter extends AbstractFlexibleItem<ProductListAdapter.
             @Override
             public void onClick(View v) {
                 Context context1 = v.getContext();
-//                context1.startActivity(new Intent(context1, TripDetailsActivity.class));
+                Intent intent = new Intent(context1, ViewEditProductActivity.class);
+                intent.putExtra("product_id",product_id);
+                context1.startActivity(intent);
             }
         });
     }

@@ -27,6 +27,8 @@ public interface ProductRemoveDao {
     @Query("SELECT * FROM removedproduct WHERE category_id = :id")
     List<RemovedProduct> findByProductWithCatId(int id);
 
+    @Query("SELECT COUNT( *) FROM removedproduct WHERE product_code = :code")
+    int countByProductCode(String code);
 
     //    @Insert(onConflict = OnConflictStrategy.REPLACE)
     @Insert()

@@ -84,17 +84,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
 
             <RelativeLayout
+                android:layout_marginEnd="5dp"
+                android:padding="10dp"
                 android:elevation="8dp"
                 android:background="@color/trans_success_stroke_color"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
                 android:layout_weight="1">
 
 
@@ -172,13 +173,13 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:padding="10dp"
                 android:elevation="8dp"
                 android:background="@color/common_google_signin_btn_text_light_disabled"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_weight="1">
 
 
@@ -261,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/amiko"
+                android:fontFamily="@font/roboto_mono_bold"
                 android:text="Products by Category"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
