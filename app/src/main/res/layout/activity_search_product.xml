@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".activities.SearchProductActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/grey_100"
+        android:elevation="8dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:onClick="sGoBack"
+            android:layout_centerVertical="true"
+            android:id="@+id/sBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:padding="5dp"
+            android:src="@drawable/arrow_back_icon"
+            app:tint="@color/black" />
+
+        <SearchView
+            style="@style/Widget.AppCompat.Light.SearchView"
+            android:layout_toRightOf="@+id/sBack"
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/black"
+            android:closeIcon="@drawable/close_icon"
+            android:focusable="true"
+            android:focusedByDefault="true"
+            android:iconifiedByDefault="false"
+            android:layoutDirection="ltr"
+            android:transitionName="toSearchTransition" />`
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerProducts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

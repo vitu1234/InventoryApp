@@ -34,7 +34,7 @@
                 android:fontFamily="@font/roboto_mono_bold"
                 android:text="Add Product"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
 
 
         </RelativeLayout>

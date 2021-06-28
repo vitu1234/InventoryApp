@@ -82,5 +82,8 @@ dependencies {
     //CIRCLER imageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+//csv creater and reader
+    implementation 'com.github.hsmnzaydn:easy-csv:1.0.0'
+    // Here is opencsv library
 
 }

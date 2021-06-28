@@ -46,7 +46,7 @@ public class DashboardFragment extends Fragment {
     private int maxNumberOfLines = 4;
     private int numberOfPoints = 12;
 
-    TextView textViewCountProductsIn;
+    TextView textViewCountProductsIn, textViewCountCategories, textViewRevenue;
 
     AppDatabase room_db;
 
@@ -85,9 +85,14 @@ public class DashboardFragment extends Fragment {
 
         chart = view.findViewById(R.id.chart);
         textViewCountProductsIn = view.findViewById(R.id.textViewCountProductsIn);
+        textViewCountCategories = view.findViewById(R.id.textViewCountProductsOut);
+        textViewRevenue = view.findViewById(R.id.textViewRevenue);
+
         chart.setOnValueTouchListener(new ValueTouchListener());
 
-        textViewCountProductsIn.setText(room_db.productDao().countAllProducts()+" ");
+        textViewCountProductsIn.setText(room_db.productDao().countAllProducts() + " ");
+        textViewCountCategories.setText(room_db.categoryDao().countAllCategorys() + " ");
+        textViewRevenue.setText("MWK " + room_db.productRemoveDao().sumRevenueProducts());
 
         // Generate some random values.
         generateValues();

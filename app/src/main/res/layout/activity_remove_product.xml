@@ -35,7 +35,7 @@
                 android:fontFamily="@font/roboto_mono_bold"
                 android:text="Scan Product"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="14sp" />
 
 
         </RelativeLayout>
@@ -60,6 +60,14 @@
                 android:layout_height="300dp"
                 android:layout_above="@+id/btnAction"
                 android:layout_centerHorizontal="true" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:id="@+id/rmProdName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Product Name"
+                android:inputType="none" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:textAlignment="center"
@@ -69,7 +77,33 @@
                 android:layout_marginTop="30dp"
                 android:hint="Quantity to remove"
                 android:inputType="number" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:id="@+id/rmVat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="VAT 16.5%"
+                android:inputType="none" />
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:id="@+id/rmDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Discount Amount (MWK)"
+                android:inputType="none" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:id="@+id/rmNetAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Net Amount (MWK)"
+                android:inputType="none" />
             <TextView
                 android:id="@+id/txtBarcodeValueRemove"
                 android:layout_width="wrap_content"

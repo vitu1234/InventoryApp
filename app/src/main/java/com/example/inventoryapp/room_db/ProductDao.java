@@ -24,6 +24,10 @@ public interface ProductDao {
     @Query("SELECT * FROM product WHERE category_id = :id")
     List<Product> findByProductWithCatId(int id);
 
+    @Query("SELECT * FROM product INNER JOIN category ON product.category_id = category.category_id  WHERE product_name LIKE '%' || :name  || '%' OR category_name LIKE '%' || :name  || '%'")
+    List<Product> searchByProductName(String name);
+
+
 
     //    @Insert(onConflict = OnConflictStrategy.REPLACE)
     @Insert()

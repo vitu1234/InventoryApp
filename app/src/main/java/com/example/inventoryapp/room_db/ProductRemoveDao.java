@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface ProductRemoveDao {
-    @Query("SELECT *FROM product ORDER BY product_id DESC")
+    @Query("SELECT *FROM removedproduct ORDER BY product_id DESC")
     List<RemovedProduct> getAllProducts();
 
     @Query("SELECT * FROM removedproduct WHERE product_id = :id")
@@ -29,6 +29,9 @@ public interface ProductRemoveDao {
 
     @Query("SELECT COUNT( *) FROM removedproduct WHERE product_code = :code")
     int countByProductCode(String code);
+
+    @Query("SELECT COUNT( DISTINCT(product_code)) FROM removedproduct")
+    int countAllDistinctProductCode();
 
     //    @Insert(onConflict = OnConflictStrategy.REPLACE)
     @Insert()
@@ -60,4 +63,7 @@ public interface ProductRemoveDao {
     //count all car
     @Query("SELECT COUNT(*) FROM removedproduct ")
     int countAllProducts();
+
+    @Query("SELECT SUM(price) FROM removedproduct ")
+    int sumRevenueProducts();
 }

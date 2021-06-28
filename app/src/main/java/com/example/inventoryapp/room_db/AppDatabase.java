@@ -12,7 +12,7 @@ import com.example.inventoryapp.models.RemovedProduct;
 import com.example.inventoryapp.models.User;
 
 
-@Database(entities = {User.class, Category.class, Product.class, RemovedProduct.class}, exportSchema = false, version = 1)
+@Database(entities = {User.class, Category.class, Product.class, RemovedProduct.class}, exportSchema = false, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract CategoryDao categoryDao();

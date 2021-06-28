@@ -38,7 +38,7 @@ public class RemoveProductActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     String intentData = "";
 
-    TextInputEditText textInputEditTextQty;
+    TextInputEditText textInputEditTextQty, textInputEditTextVAT, textInputEditTextDiscount, textInputEditTextNetAmount, textInputEditTextProdName;
 
     AppDatabase room_db;
 
@@ -67,12 +67,14 @@ public class RemoveProductActivity extends AppCompatActivity {
         txtBarcodeValue = findViewById(R.id.txtBarcodeValueRemove);
         surfaceView = findViewById(R.id.surfaceViewRemove);
         textInputEditTextQty = findViewById(R.id.rmQuantity);
+        textInputEditTextProdName = findViewById(R.id.rmProdName);
+        textInputEditTextNetAmount = findViewById(R.id.rmNetAmount);
         textInputEditTextQty.setText(1 + "");
     }
 
     private void initialiseDetectorsAndSources() {
 
-        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
@@ -123,28 +125,24 @@ public class RemoveProductActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
 
+                    Toast.makeText(RemoveProductActivity.this, "Please wait...", Toast.LENGTH_SHORT).show();
+                    txtBarcodeValue.post(() -> {
 
-                    txtBarcodeValue.post(new Runnable() {
+                        intentData = barcodes.valueAt(0).displayValue;
+                        Product product = room_db.productDao().findByProductCode(intentData);
+                        textInputEditTextProdName.setText(product.getProduct_name());
 
-                        @Override
-                        public void run() {
+                        txtBarcodeValue.setText(intentData);
+                        surfaceView.setVisibility(View.GONE);
+                        cameraSource.release();
+                        cameraSource.stop();
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            progressDialog.closeDialog();
+                            removeProduct(intentData);
 
-                            intentData = barcodes.valueAt(0).displayValue;
-                            txtBarcodeValue.setText(intentData);
-                            surfaceView.setVisibility(View.GONE);
-                            cameraSource.release();
-                            cameraSource.stop();
-                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressDialog.closeDialog();
-                                    removeProduct(intentData);
-
-                                }
-                            }, 1000);
+                        }, 2000);
 
 
-                        }
                     });
 
                 }
@@ -179,31 +177,18 @@ public class RemoveProductActivity extends AppCompatActivity {
             removedProduct.setProduct_description(product.getProduct_description());
             removedProduct.setProduct_name(product.getProduct_name());
             removedProduct.setQuantity((Integer.parseInt(textInputEditTextQty.getText().toString())));
+            int discount = 0;
+            if (!textInputEditTextDiscount.getText().toString().isEmpty()) {
+                discount = Integer.parseInt(textInputEditTextDiscount.getText().toString());
+            }
+            int netTotal = (int) ((16.5 / (Integer.parseInt(String.valueOf(product.getPrice())) * Integer.parseInt(textInputEditTextQty.getText().toString())) / 100) - discount);
+
+            removedProduct.setProduct_discount(discount);
+            removedProduct.setProduct_net_total(netTotal);
 
             if (product.getQuantity() >= Integer.parseInt(textInputEditTextQty.getText().toString())) {
-
-
                 room_db.productDao().updateProduct(product1);
-
-                //check if product exists in the checkedout
-                if (room_db.productRemoveDao().countByProductCode(product_code) > 0) {
-                    //get current values
-                    RemovedProduct removedProduct1 = room_db.productRemoveDao().findByProductCode(product_code);
-                    int qtyDb = removedProduct.getQuantity();
-                    int newQty = Integer.parseInt(textInputEditTextQty.getText().toString()) + qtyDb;
-                    //update the product
-                    removedProduct1.setProduct_id(product.getProduct_id());
-                    removedProduct1.setCategory_id(product.getCategory_id());
-                    removedProduct1.setPrice(product.getPrice());
-                    removedProduct1.setProduct_code(product_code);
-                    removedProduct1.setProduct_description(product.getProduct_description());
-                    removedProduct1.setProduct_name(product.getProduct_name());
-                    removedProduct1.setQuantity(newQty);
-                    room_db.productRemoveDao().updateProduct(removedProduct);
-                } else {
-                    room_db.productRemoveDao().insertProduct(removedProduct);
-                }
-
+                room_db.productRemoveDao().insertProduct(removedProduct);
 
                 progressDialog.showSuccessAlert("Removed, please wait!");
 

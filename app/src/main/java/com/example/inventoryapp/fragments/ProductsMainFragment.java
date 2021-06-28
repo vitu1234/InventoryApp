@@ -1,7 +1,10 @@
 package com.example.inventoryapp.fragments;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import com.example.inventoryapp.R;
 import com.example.inventoryapp.activities.AddProductActivity;
 import com.example.inventoryapp.activities.ImportProductsActivity;
 import com.example.inventoryapp.activities.RemoveProductActivity;
+import com.example.inventoryapp.activities.SearchProductActivity;
 import com.example.inventoryapp.adapters.recyclers.CategoriesProductsListAdapter;
 import com.example.inventoryapp.models.Category;
 import com.example.inventoryapp.room_db.AppDatabase;
@@ -35,7 +39,7 @@ public class ProductsMainFragment extends Fragment {
     List<Category> categoryList;
 
     TextView textViewproductsCount, textViewRemoved;
-    ImageView imageViewRemoveProd, imageViewattachCSV;
+    ImageView imageViewRemoveProd, imageViewattachCSV, imageViewSearch;
 
     public ProductsMainFragment() {
         // Required empty public constructor
@@ -60,7 +64,7 @@ public class ProductsMainFragment extends Fragment {
         textViewRemoved = view.findViewById(R.id.productsStockCount);
         imageViewattachCSV = view.findViewById(R.id.importIcon);
         imageViewRemoveProd = view.findViewById(R.id.removeProdBtn);
-
+        imageViewSearch = view.findViewById(R.id.searchProdBtn);
 
         innitViews();
 
@@ -68,6 +72,20 @@ public class ProductsMainFragment extends Fragment {
         imageViewScan.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddProductActivity.class)));
         imageViewRemoveProd.setOnClickListener(v -> startActivity(new Intent(getActivity(), RemoveProductActivity.class)));
         imageViewattachCSV.setOnClickListener(v -> startActivity(new Intent(getActivity(), ImportProductsActivity.class)));
+        imageViewSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SearchProductActivity.class);
+
+            //add shared animation
+            Pair[] pairs = new Pair[1];//number of elements to be animated
+            pairs[0] = new Pair<View, String>(view.findViewById(R.id.searchProdBtn), "toSearchTransition");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
+                startActivity(intent, options.toBundle());
+            } else {
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }
@@ -75,7 +93,7 @@ public class ProductsMainFragment extends Fragment {
     private void innitViews() {
         int countProducts = room_db.productDao().countAllProducts();
         textViewproductsCount.setText(countProducts + "");
-        textViewRemoved.setText(""+room_db.productRemoveDao().countAllProducts());
+        textViewRemoved.setText("" + room_db.productRemoveDao().countAllDistinctProductCode());
     }
 
     public List<IFlexible> getDatabaseList() {
